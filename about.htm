@@ -1,0 +1,293 @@
+<!DOCTYPE HTML>
+<!--
+	Testing out D3 code
+-->
+<html>
+	<head>
+		
+		<title>cjj4 About the Visualization</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+                <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+		<style>
+			<body {
+				font-family: Helvetica;
+
+			}
+			svg {
+
+		width:1000px;
+		height:500px;
+
+	}
+
+	.head-label {
+		font-size: 10px;
+		font-style: italic;
+		text-transform: uppercase;
+		float: right;
+	}
+	
+	.top-label {
+		font-size: 13px;
+		font-style: italic;
+		text-transform: uppercase;
+		float: left;
+	}
+
+	.region-label {
+		text-align: right;
+		font-weight: bold;
+		width: 90px;
+		padding-right: 10px;
+	}
+
+	.clearfix {
+		clear: both;
+
+	}
+
+	.bar {
+		fill: DarkSlateBlue;
+
+	}
+
+	.bar-label {
+		text-anchor: end;
+
+	}
+
+	.axis-label {
+		text-anchor: middle;
+		font-size: 13px;
+	}
+	.selected {
+		font-weight: bold;
+	}
+	.button-selected {
+		font-weight: bold;
+	}
+	.NextButton {
+  font: bold 11px Arial;
+  text-decoration: none;
+  background-color: #EEEEEE;
+  color: #333333;
+  padding: 2px 6px 2px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+}
+
+		
+	</head>
+<style>
+
+    h1 {
+    	position: absolute;
+    	left: 1px;
+    	top: 1px;
+	} 
+    body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        width: 1200px;
+        height: 625px;
+        position: relative;
+	 }
+
+    svg {
+        width: 100%;
+        height: 100%;
+        position: center;
+    }
+
+    .toolTip {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        position: absolute;
+        display: none;
+        width: auto;
+        height: auto;
+        background: none repeat scroll 0 0 white;
+        border: 0 none;
+        border-radius: 8px 8px 8px 8px;
+        box-shadow: -3px 3px 15px #888888;
+        color: black;
+        font: 12px sans-serif;
+        padding: 5px;
+        text-align: center;
+    }
+
+    text {
+        font: 10px sans-serif;
+        color: white;
+    }
+    text.value {
+        font-size: 120%;
+        fill: white;
+    }
+
+    .axisHorizontal path{
+        fill: none;
+    }
+
+    .axisHorizontal .tick line {
+        stroke-width: 1;
+        stroke: rgba(0, 0, 0, 0.2);
+    }
+
+    .bar {
+        fill: steelblue;
+        fill-opacity: .9;
+    }
+	.button {
+		float: left;
+		margin-left: 10px;
+		font-weight: lighter;
+		cursor: pointer;
+		border-radius: 28px;
+		background: steelblue;
+  		font-family: Arial;
+  		color: #ffffff;
+  		font-size: 16px;
+	}
+	.selected {
+		font-weight: bold;
+	}
+
+	.button2 {
+		float: left;
+		margin-left: 10px;
+		font-weight: lighter;
+		cursor: pointer;
+		border-radius: 28px;
+		background: darkorange;
+  		font-family: Arial;
+  		color: #ffffff;
+  		font-size: 16px;
+	}
+
+
+</style>
+<body>
+
+<h1 style="color:blue;">About the Visualization</h1> 
+<h3 style="color:blue;">CS 498 - Summer 2017 - Final Project - Cynthia Johnson - cjj4</h3> 
+
+<p>This visualization is an Interactive Slide Show.  The question or lesson 
+that this visualization attempts to explore is whether bank failures throughout the past 17 years
+were random events or in a pattern of area of the country.  
+<br><br>
+Data from the Federal Depositors Insurance Corporation (FDIC)  The list of all banking institutions was retrieved and then limited to the failed institutions.
+<br><br>
+For each bank, the asset value is defined as the assets owned by the institution.  For failed institutions, this value represents the asset value at the time of failure.
+<br><br>
+Slide 1 is the overall context of all bank failures from 2000 to 2017.  The default display is a graph showing failed asset totals in dollars by FDIC Region.
+The charts show that a total of $709 Billion (B) in assets has failed.  In 2008, more than half, $371B, failed.  And in 2008, the San Francisco region accounted for $360B.
+<br><br>
+Buttons at the bottom allow alternate graphs to view asset failures by state and by year.  The Next button advances to Page 2.
+<br><br>
+Because the San Francisco region accounts for the largest total asset failure by a significant margin, it is the subject of the 2nd slide.  The default view is failed assets by state.
+Buttons at the bottom allow alternate graphs to view asset failures by state and by year. The Next button advances to Page 3.
+<br><br>
+Because Nevada in 2008 accounts for a significantly large share of asset failures, it is the subject of the 3rd slide.  The default view is failed assets by bank name.
+ A deeper look reveals that the failure of Washington Mutual Bank accounted for $307B.  
+Buttons at the bottom allow alternate graphs to view asset failures by city or bank name.
+<br> <br> 
+
+Project Rubric Notes:<br>
+1.  Hybrid structure:  Interactive Slide Show.  Slides are author-driven with 3 in sequence.  Reader may select different views to look at data presented in each slide.<br>
+2.  Utilization of scenes:  Slide 1 provides the full scene of all bank failures over 17 years.  Each successive slide provides a description of the data available to view.<br>
+3.  Annotations:  Each bar in the graphs includes a tool tip with the actual value of the bar.<br>
+4.  Parameters:  Each button sends a different parameter to the graph drawing allowing the viewer to choose different dimensions of data segmentation.<br>
+5.  Triggers:  Two different triggers are used.  Buttons to choose a different dimensional view of the data as well as buttons to move to other slides.<br>
+</p>
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+
+	
+	<script>
+	
+var data = "xyz"
+
+function load_index(){
+
+window.location.href = "file:///C:/Users/umllc/Documents/GitHub/Testing/index.htm";
+
+};
+
+
+
+function DrawPage(data) {		
+    
+    
+    var NextButton = ["Back"];
+
+    	
+
+var body = d3.select("body");
+		
+
+    
+
+	
+		
+		body.append("div")
+			.attr("class", "clearfix");
+    
+		
+    
+	
+    
+    
+
+    
+    	
+<!--  try to get a Back button -->
+
+	body.append("div")
+		.attr("class", "buttons-container")
+		.attr("text-align", "center")
+		.selectAll("div").data(NextButton)
+	    .enter().append("div")
+		.text(function(d) { return d; })
+		.attr("class", "button2")
+		.on("click", function(d) {
+			load_index();
+		});
+
+<!--   -->
+	body.append("div")
+		.attr("class", "clearfix");
+
+ 
+	
+	
+};
+
+<!-- end of DrawPage function -->
+<!-- -->
+
+	
+ <!-- default first selection to ByRegion -->
+  
+      	DrawPage(data);
+		
+</script>
+</body>
+</html>
+	
+<!--  credits 
+The MIT License (MIT)
+
+Copyright (c) 2015 Juan Cruz-Benito. http://juancb.es
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+ -->
+		
+		
+			

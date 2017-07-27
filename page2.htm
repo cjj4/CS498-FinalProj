@@ -1,0 +1,415 @@
+<!DOCTYPE HTML>
+<!--
+	Testing out D3 code
+-->
+<html>
+	<head>
+		
+		<title>cjj4 Page2</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+                <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+		<style>
+			<body {
+				font-family: Helvetica;
+
+			}
+			svg {
+
+		width:1000px;
+		height:500px;
+
+	}
+
+	.head-label {
+		font-size: 10px;
+		font-style: italic;
+		text-transform: uppercase;
+		float: right;
+	}
+	
+	.top-label {
+		font-size: 13px;
+		font-style: italic;
+		text-transform: uppercase;
+		float: left;
+	}
+
+	.region-label {
+		text-align: right;
+		font-weight: bold;
+		width: 90px;
+		padding-right: 10px;
+	}
+
+	.clearfix {
+		clear: both;
+
+	}
+
+	.bar {
+		fill: DarkSlateBlue;
+
+	}
+
+	.bar-label {
+		text-anchor: end;
+
+	}
+
+	.axis-label {
+		text-anchor: middle;
+		font-size: 13px;
+	}
+	.selected {
+		font-weight: bold;
+	}
+	.button-selected {
+		font-weight: bold;
+	}
+	.NextButton {
+  font: bold 11px Arial;
+  text-decoration: none;
+  background-color: #EEEEEE;
+  color: #333333;
+  padding: 2px 6px 2px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+}
+
+		
+	</head>
+<style>
+
+    h1 {
+    	position: absolute;
+    	left: 1px;
+    	top: 1px;
+	} 
+    body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        width: 960px;
+        height: 500px;
+        position: relative;
+	 }
+
+    svg {
+        width: 100%;
+        height: 100%;
+        position: center;
+    }
+
+    .toolTip {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        position: absolute;
+        display: none;
+        width: auto;
+        height: auto;
+        background: none repeat scroll 0 0 white;
+        border: 0 none;
+        border-radius: 8px 8px 8px 8px;
+        box-shadow: -3px 3px 15px #888888;
+        color: black;
+        font: 12px sans-serif;
+        padding: 5px;
+        text-align: center;
+    }
+
+    text {
+        font: 10px sans-serif;
+        color: white;
+    }
+    text.value {
+        font-size: 120%;
+        fill: white;
+    }
+
+    .axisHorizontal path{
+        fill: none;
+    }
+
+    .axisHorizontal .tick line {
+        stroke-width: 1;
+        stroke: rgba(0, 0, 0, 0.2);
+    }
+
+    .bar {
+        fill: steelblue;
+        fill-opacity: .9;
+    }
+	.button {
+		float: left;
+		margin-left: 10px;
+		font-weight: lighter;
+		cursor: pointer;
+		border-radius: 28px;
+		background: steelblue;
+  		font-family: Arial;
+  		color: #ffffff;
+  		font-size: 16px;
+	}
+	.selected {
+		font-weight: bold;
+	}
+
+	.button2 {
+		float: left;
+		margin-left: 10px;
+		font-weight: lighter;
+		cursor: pointer;
+		border-radius: 28px;
+		background: darkorange;
+  		font-family: Arial;
+  		color: #ffffff;
+  		font-size: 16px;
+	}
+
+
+</style>
+<body>
+
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+
+	<script>
+	
+<!-- load up data sets -->	
+		
+		var SFByState = [
+			{label:"Arizona",value:2236242},
+			{label:"California",value:90920304},
+			{label:"Hawaii",value:63890},
+			{label:"Idaho",value:644017},
+			{label:"Nevada",value:315507926},
+			{label:"Oregon",value:2325809},
+			{label:"Utah",value:1827311},
+			{label:"Washington",value:11181954},
+			{label:"Wyoming",value:70188}
+			];
+		var SFByYear = [
+			{label:"2000",value:63890},
+			{label:"2002",value:700180},
+			{label:"2003",value:904294},
+			{label:"2004",value:56774},
+			{label:"2008",value:360366530},
+			{label:"2009",value:37222617},
+			{label:"2010",value:22507040},
+			{label:"2011",value:2386913},
+			{label:"2012",value:129253},
+			{label:"2013",value:134060},
+			{label:"2014",value:234097},
+			{label:"2015",value:3785},
+			{label:"2017",value:68208}
+			];
+2
+		var data = SFByState;
+		var title = "Total Assets Failed In FDIC San Francisco Region - By State(in $)";
+
+<!-- end data sets --> 
+
+function load_page3(){
+window.location.href = "file:///C:/Users/umllc/Documents/GitHub/Testing/page3.htm";
+
+};
+
+function DrawPage2(data) {		
+    
+    var buttonLabels = ["By State", "By Year"]; 
+    var BlankButton = ["                                      "];
+    var NextButton = ["Next Page"];
+
+
+	
+
+var body = d3.select("body");
+		
+
+    body.append("h1")
+			.attr("class", "head-label")
+	  		.text("CS 498-Summer 2017-Final Project - Cynthia Johnson - cjj4");
+	body.append("h2")
+			.append("p")
+			.text("Bank Failures 2000 - 2017 FDIC San Francisco Region");
+		
+		body.append("div")
+			.attr("class", "clearfix");
+    
+	body.append("div")
+			.attr("class", "top-label")
+	  		.append("p")
+			.text(title);
+	
+
+	
+    
+	var div = d3.select("body").append("div").attr("class", "toolTip");
+
+    var axisMargin = 20,
+            margin = 40,
+            valueMargin = 4,
+            width = parseInt(d3.select('body').style('width'), 10),
+            height = parseInt(d3.select('body').style('height'), 10),
+            barHeight = (height-axisMargin-margin*2)* 0.4/data.length,
+            barPadding = (height-axisMargin-margin*2)*0.6/data.length,
+            data, bar, svg, scale, xAxis, labelWidth = 0;
+
+    max = d3.max(data, function(d) { return d.value; });
+
+    svg = d3.select('body')
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+
+    bar = svg.selectAll("g")
+            .data(data)
+            .enter()
+            .append("g");
+
+    bar.attr("class", "bar")
+            .attr("cx",0)
+            .attr("transform", function(d, i) {
+                return "translate(" + margin + "," + (i * (barHeight + barPadding) + barPadding) + ")";
+            });
+
+    bar.append("text")
+            .attr("class", "label")
+            .attr("y", barHeight / 2)
+            .attr("dy", ".35em") //vertical align middle
+            .text(function(d){
+                return d.label;
+            }).each(function() {
+        labelWidth = Math.ceil(Math.max(labelWidth, this.getBBox().width));
+    });
+
+    scale = d3.scale.linear()
+            .domain([0, max])
+            .range([0, width - margin*2 - labelWidth]);
+
+    xAxis = d3.svg.axis()
+            .scale(scale)
+            .tickSize(-height + 2*margin + axisMargin)
+            .orient("bottom");
+
+    bar.append("rect")
+            .attr("transform", "translate("+labelWidth+", 0)")
+            .attr("height", barHeight)
+            .attr("width", function(d){
+                return scale(d.value);
+            });
+
+    bar.append("text")
+            .attr("class", "value")
+            .attr("y", barHeight / 2)
+            .attr("dx", -valueMargin + labelWidth) //margin right
+            .attr("dy", ".35em") //vertical align middle
+           .attr("text-anchor", "end")
+            .text(function(d){
+                return (" ");
+            }) 
+            .attr("x", function(d){
+                var width = this.getBBox().width;
+                return Math.max(width + valueMargin, scale(d.value));
+            });
+
+    bar
+            .on("mousemove", function(d){
+                div.style("left", d3.event.pageX+10+"px");
+                div.style("top", d3.event.pageY-25+"px");
+                div.style("display", "inline-block");
+                div.html((d.label)+"<br>"+(d.value));
+            });
+    bar
+            .on("mouseout", function(d){
+                div.style("display", "none");
+            });
+
+    svg.insert("g",":first-child")
+            .attr("class", "axisHorizontal")
+            .attr("transform", "translate(" + (margin + labelWidth) + ","+ (height - axisMargin - margin)+")")
+            .call(xAxis);
+
+	body.append("div")
+		.attr("class", "buttons-container")
+		.attr("text-align", "center")
+		.selectAll("div").data(buttonLabels)
+	    .enter().append("div")
+		.text(function(d) { return d; })
+		.attr("class", function(d) {
+			if(d == data)
+				return "button selected";
+			else
+				return "button";
+			})
+		.on("click", function(d) {
+			d3.select(".selected")
+			.classed("selected", false);
+			d3.select(this)
+			.classed("selected", true);
+
+			if(d == "By State") {
+				data = SFByState;
+				document.body.innerHTML = "";
+				title = "Total Assets Failed in FDIC San Francisco Region - By State (in $)";
+				DrawPage2(SFByState);
+				
+			     }
+			     else {
+				data = SFByYear;
+				document.body.innerHTML = "";
+				title = "Total Assets Failed in FDIC San Francisco Region - By Year (in $)";
+				DrawPage2(SFByYear);
+				
+				}
+			
+		});
+<!--  try to get a Next Page button -->
+	
+	body.append("div")
+		.attr("class", "buttons-container")
+		.attr("text-align", "center")
+		.selectAll("div").data(NextButton)
+	    .enter().append("div")
+		.text(function(d) { return d; })
+		.attr("class", "button2")
+		.on("click", function(d) {
+			load_page3();
+		});
+<!--   -->
+	body.append("div")
+		.attr("class", "clearfix");
+
+ 
+	
+	
+};
+
+<!-- end of DrawPage2 function -->
+<!-- -->
+
+	
+ <!-- default first selection to ByRegion -->
+  
+      	DrawPage2(SFByState);
+		
+</script>
+</body>
+</html>
+	
+<!--  credits 
+The MIT License (MIT)
+
+Copyright (c) 2015 Juan Cruz-Benito. http://juancb.es
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+ -->
+		
+		
+			
